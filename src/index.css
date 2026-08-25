@@ -1,0 +1,204 @@
+@import "tailwindcss";
+
+/* shadcn/ui's dark variant, driven by a class on <html>. */
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Palette. Neutral slate surfaces with a single warm accent taken from the
+ * app icon, so the amber only ever means "this is live".
+ */
+:root {
+  --radius: 0.75rem;
+
+  --background: oklch(0.985 0.002 250);
+  --foreground: oklch(0.21 0.02 260);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.21 0.02 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.21 0.02 260);
+  --primary: oklch(0.55 0.16 255);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.96 0.004 250);
+  --secondary-foreground: oklch(0.28 0.02 260);
+  --muted: oklch(0.96 0.004 250);
+  --muted-foreground: oklch(0.53 0.015 258);
+  --accent: oklch(0.95 0.006 250);
+  --accent-foreground: oklch(0.24 0.02 260);
+  --destructive: oklch(0.58 0.2 27);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.91 0.005 255);
+  --input: oklch(0.91 0.005 255);
+  --ring: oklch(0.62 0.14 255);
+
+  --live: oklch(0.68 0.16 62);
+  --live-foreground: oklch(0.22 0.04 60);
+  --online: oklch(0.66 0.16 155);
+}
+
+.dark {
+  --background: oklch(0.17 0.014 258);
+  --foreground: oklch(0.94 0.006 250);
+  --card: oklch(0.21 0.016 258);
+  --card-foreground: oklch(0.94 0.006 250);
+  --popover: oklch(0.22 0.016 258);
+  --popover-foreground: oklch(0.94 0.006 250);
+  --primary: oklch(0.68 0.14 258);
+  --primary-foreground: oklch(0.17 0.014 258);
+  --secondary: oklch(0.26 0.016 258);
+  --secondary-foreground: oklch(0.93 0.006 250);
+  --muted: oklch(0.26 0.016 258);
+  --muted-foreground: oklch(0.68 0.014 256);
+  --accent: oklch(0.28 0.018 258);
+  --accent-foreground: oklch(0.95 0.006 250);
+  --destructive: oklch(0.62 0.19 25);
+  --destructive-foreground: oklch(0.97 0 0);
+  --border: oklch(0.3 0.016 258);
+  --input: oklch(0.32 0.016 258);
+  --ring: oklch(0.6 0.12 258);
+
+  --live: oklch(0.78 0.15 72);
+  --live-foreground: oklch(0.19 0.03 60);
+  --online: oklch(0.72 0.15 158);
+}
+
+/*
+ * The same palette, applied from the very first paint when the OS is in
+ * dark mode. Doing this in CSS rather than waiting for JS to add `.dark`
+ * is what keeps the window from flashing the wrong background on launch.
+ * `:not(.light)` leaves room for an explicit override later.
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --background: oklch(0.17 0.014 258);
+    --foreground: oklch(0.94 0.006 250);
+    --card: oklch(0.21 0.016 258);
+    --card-foreground: oklch(0.94 0.006 250);
+    --popover: oklch(0.22 0.016 258);
+    --popover-foreground: oklch(0.94 0.006 250);
+    --primary: oklch(0.68 0.14 258);
+    --primary-foreground: oklch(0.17 0.014 258);
+    --secondary: oklch(0.26 0.016 258);
+    --secondary-foreground: oklch(0.93 0.006 250);
+    --muted: oklch(0.26 0.016 258);
+    --muted-foreground: oklch(0.68 0.014 256);
+    --accent: oklch(0.28 0.018 258);
+    --accent-foreground: oklch(0.95 0.006 250);
+    --destructive: oklch(0.62 0.19 25);
+    --destructive-foreground: oklch(0.97 0 0);
+    --border: oklch(0.3 0.016 258);
+    --input: oklch(0.32 0.016 258);
+    --ring: oklch(0.6 0.12 258);
+
+    --live: oklch(0.78 0.15 72);
+    --live-foreground: oklch(0.19 0.03 60);
+    --online: oklch(0.72 0.15 158);
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-live: var(--live);
+  --color-live-foreground: var(--live-foreground);
+  --color-online: var(--online);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Roboto, Ubuntu,
+      Cantarell, "Helvetica Neue", sans-serif;
+    /* A desktop window is not a document: never rubber-band or select chrome. */
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Anything the user may need to copy stays selectable. */
+  .selectable {
+    user-select: text;
+    -webkit-user-select: text;
+    cursor: text;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: color-mix(in oklch, var(--muted-foreground) 30%, transparent);
+    border: 3px solid transparent;
+    border-radius: 999px;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in oklch, var(--muted-foreground) 50%, transparent);
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /* The "sharing is live" pulse on the status dot. */
+  @keyframes droplan-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.45;
+      transform: scale(0.82);
+    }
+  }
+
+  .animate-live-pulse {
+    animation: droplan-pulse 2.4s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-live-pulse {
+      animation: none;
+    }
+  }
+}

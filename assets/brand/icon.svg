@@ -1,0 +1,42 @@
+<!--
+  DropLAN application icon — master asset.
+
+  Reads top to bottom as the product does: a file drops in, lands on this
+  machine (the accented node), and fans out to the devices beside it on the
+  local network. Deliberately not a download arrow into a tray, and
+  deliberately not a cloud or a globe — nothing here leaves the LAN.
+
+  Built from three primitives (rounded bar, chevron, circles) so the
+  silhouette survives being 16 pixels wide.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.65" y2="1">
+      <stop offset="0" stop-color="#4A7CFF"/>
+      <stop offset="0.55" stop-color="#2B4FC9"/>
+      <stop offset="1" stop-color="#15224A"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="0.26" cy="0.16" r="0.72">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1024" height="1024" rx="228" fill="url(#bg)"/>
+  <rect width="1024" height="1024" rx="228" fill="url(#sheen)"/>
+
+  <!-- the drop -->
+  <g fill="none" stroke="#FFFFFF" stroke-width="70" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M512 214 V 536"/>
+    <path d="M382 424 L512 554 L642 424"/>
+  </g>
+
+  <!-- the LAN: this machine, and the devices it serves -->
+  <g stroke="#FFFFFF" stroke-width="26" stroke-linecap="round" stroke-opacity="0.5">
+    <path d="M512 742 L262 622"/>
+    <path d="M512 742 L762 622"/>
+  </g>
+  <circle cx="262" cy="622" r="46" fill="#FFFFFF"/>
+  <circle cx="762" cy="622" r="46" fill="#FFFFFF"/>
+  <circle cx="512" cy="742" r="62" fill="#5CE1FF"/>
+</svg>

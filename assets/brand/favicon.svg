@@ -1,0 +1,19 @@
+<!--
+  Compact DropLAN mark for favicons and inline use on the browser share page.
+  Flat fill rather than a gradient: it renders crisper at 16 pixels and keeps
+  the file small enough to inline as a data URI.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" rx="7.1" fill="#2B4FC9"/>
+  <g fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 6.7V16.8"/>
+    <path d="M11.9 13.3 16 17.3 20.1 13.3"/>
+  </g>
+  <g stroke="#fff" stroke-width="0.9" stroke-linecap="round" stroke-opacity=".5">
+    <path d="M16 23.2 8.2 19.4"/>
+    <path d="M16 23.2 23.8 19.4"/>
+  </g>
+  <circle cx="8.2" cy="19.4" r="1.45" fill="#fff"/>
+  <circle cx="23.8" cy="19.4" r="1.45" fill="#fff"/>
+  <circle cx="16" cy="23.2" r="1.95" fill="#5CE1FF"/>
+</svg>

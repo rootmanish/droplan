@@ -1,0 +1,81 @@
+[package]
+name = "droplan"
+version = "0.1.0"
+description = "Drop files. Share over LAN. A local-network file-sharing app with no cloud and no account."
+authors = ["DropLAN contributors"]
+license = "MIT"
+repository = "https://github.com/droplan/droplan"
+homepage = "https://droplan.dev"
+edition = "2021"
+# Floor imposed by the resolved dependency graph (image, icu_*), not by
+# anything in this crate.
+rust-version = "1.88"
+
+# The Tauri binary is a thin shell around this library so that the whole
+# application core stays unit- and integration-testable.
+[lib]
+name = "droplan_core"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+# --- desktop shell -----------------------------------------------------------
+tauri = { version = "2.11", features = ["tray-icon", "image-png"] }
+tauri-plugin-dialog = "2"
+tauri-plugin-clipboard-manager = "2"
+tauri-plugin-opener = "2"
+
+# --- async runtime -----------------------------------------------------------
+tokio = { version = "1", features = [
+    "rt-multi-thread",
+    "macros",
+    "net",
+    "fs",
+    "io-util",
+    "sync",
+    "time",
+] }
+tokio-util = { version = "0.7", features = ["io"] }
+futures-util = "0.3"
+
+# --- embedded http server ----------------------------------------------------
+axum = "0.8"
+tower = "0.5"
+tower-http = { version = "0.7", features = ["set-header", "trace"] }
+
+# --- serialization -----------------------------------------------------------
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# --- networking / discovery --------------------------------------------------
+if-addrs = "0.15"
+mdns-sd = "0.21"
+hostname = "0.4"
+
+# --- misc --------------------------------------------------------------------
+qrcode = { version = "0.14", default-features = false, features = ["svg"] }
+mime_guess = "2"
+getrandom = "0.4"
+percent-encoding = "2"
+thiserror = "2"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[dev-dependencies]
+# Plain-HTTP only: no TLS backend is pulled in, the server is LAN-local.
+reqwest = { version = "0.12", default-features = false, features = ["stream", "json", "cookies"] }
+tokio = { version = "1", features = ["full"] }
+tempfile = "3"
+
+[features]
+# This feature is used for production builds where `devUrl` is not used.
+custom-protocol = ["tauri/custom-protocol"]
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true

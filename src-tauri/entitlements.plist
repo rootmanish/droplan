@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- DropLAN runs an HTTP listener for other devices on the LAN. -->
+    <key>com.apple.security.network.server</key>
+    <true/>
+    <!-- Needed for mDNS advertisement / local-network discovery. -->
+    <key>com.apple.security.network.client</key>
+    <true/>
+    <!-- Files are streamed from wherever the user dropped them from. -->
+    <key>com.apple.security.files.user-selected.read-only</key>
+    <true/>
+</dict>
+</plist>

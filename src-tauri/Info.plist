@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!--
+      macOS asks the user for Local Network access the first time the app
+      touches the LAN. This string is what the system prompt shows.
+    -->
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>DropLAN needs local network access so other devices on your Wi-Fi or Ethernet can download the files you share. Nothing is sent over the internet.</string>
+    <key>NSBonjourServices</key>
+    <array>
+        <string>_http._tcp</string>
+    </array>
+    <key>LSApplicationCategoryType</key>
+    <string>public.app-category.utilities</string>
+    <key>NSHighResolutionCapable</key>
+    <true/>
+</dict>
+</plist>

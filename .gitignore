@@ -1,0 +1,17 @@
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+src-tauri/target/
+src-tauri/gen/schemas/
+
+.DS_Store
+*.log
+npm-debug.log*
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Local notes, not repo documentation.
+COMMANDS.md

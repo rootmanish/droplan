@@ -1,0 +1,38 @@
+<!--
+  Horizontal DropLAN lockup: the mark plus the wordmark.
+
+  "LAN" carries the accent colour so the compound name reads at a glance and
+  the emphasis lands on the part that says what the product does. The text
+  uses a system font stack so the lockup renders natively everywhere; a PNG
+  is produced alongside it for contexts that need fonts baked in.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="120" viewBox="0 0 400 120">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.65" y2="1">
+      <stop offset="0" stop-color="#4A7CFF"/>
+      <stop offset="0.55" stop-color="#2B4FC9"/>
+      <stop offset="1" stop-color="#15224A"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(8 12) scale(0.09375)">
+    <rect width="1024" height="1024" rx="228" fill="url(#bg)"/>
+    <g fill="none" stroke="#FFFFFF" stroke-width="70" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M512 214 V 536"/>
+      <path d="M382 424 L512 554 L642 424"/>
+    </g>
+    <g stroke="#FFFFFF" stroke-width="26" stroke-linecap="round" stroke-opacity="0.5">
+      <path d="M512 742 L262 622"/>
+      <path d="M512 742 L762 622"/>
+    </g>
+    <circle cx="262" cy="622" r="46" fill="#FFFFFF"/>
+    <circle cx="762" cy="622" r="46" fill="#FFFFFF"/>
+    <circle cx="512" cy="742" r="62" fill="#5CE1FF"/>
+  </g>
+
+  <text x="130" y="76"
+        font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, 'Helvetica Neue', Arial, sans-serif"
+        font-size="58" font-weight="700" letter-spacing="-1.5">
+    <tspan fill="#2B4FC9">Drop</tspan><tspan fill="#1E9FD8">LAN</tspan>
+  </text>
+</svg>

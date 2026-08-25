@@ -1,0 +1,42 @@
+<!--
+  GitHub social preview (1280x640). Set it under repository Settings → Social
+  preview; GitHub does not pick it up from the tree automatically.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <defs>
+    <linearGradient id="page" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0" stop-color="#1B2440"/>
+      <stop offset="1" stop-color="#0D1220"/>
+    </linearGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.65" y2="1">
+      <stop offset="0" stop-color="#4A7CFF"/>
+      <stop offset="0.55" stop-color="#2B4FC9"/>
+      <stop offset="1" stop-color="#15224A"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#page)"/>
+
+  <g transform="translate(140 176) scale(0.1875)">
+    <rect width="1024" height="1024" rx="228" fill="url(#bg)"/>
+    <g fill="none" stroke="#FFFFFF" stroke-width="70" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M512 214 V 536"/>
+      <path d="M382 424 L512 554 L642 424"/>
+    </g>
+    <g stroke="#FFFFFF" stroke-width="26" stroke-linecap="round" stroke-opacity="0.5">
+      <path d="M512 742 L262 622"/>
+      <path d="M512 742 L762 622"/>
+    </g>
+    <circle cx="262" cy="622" r="46" fill="#FFFFFF"/>
+    <circle cx="762" cy="622" r="46" fill="#FFFFFF"/>
+    <circle cx="512" cy="742" r="62" fill="#5CE1FF"/>
+  </g>
+
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, 'Helvetica Neue', Arial, sans-serif">
+    <text x="380" y="286" font-size="104" font-weight="700" letter-spacing="-3">
+      <tspan fill="#FFFFFF">Drop</tspan><tspan fill="#5CE1FF">LAN</tspan>
+    </text>
+    <text x="384" y="356" font-size="40" font-weight="500" fill="#AFC0E0">Drop files. Share over LAN.</text>
+    <text x="384" y="426" font-size="27" font-weight="400" fill="#7C8CAE">No cloud. No account. No internet required.</text>
+  </g>
+</svg>
