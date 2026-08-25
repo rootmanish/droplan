@@ -40,6 +40,57 @@ memory, and the bytes are read from where they already live.
 
 ---
 
+## Installing DropLAN
+
+Grab the installer for your platform from the
+[Releases page](https://github.com/rootmanish/droplan/releases/latest). No
+account, no installer sign-up — just download and run.
+
+Current builds are **not code-signed** (that needs a paid Apple Developer
+account and a Windows code-signing certificate, neither of which this project
+has yet), so both macOS and Windows show an extra warning on first launch.
+That's expected — skip to the platform steps below.
+
+### macOS
+
+1. Download `DropLAN_<version>_aarch64.dmg` (Apple Silicon — M1 and newer) or
+   `DropLAN_<version>_x64.dmg` (Intel). Not sure which you have: Apple menu →
+   About This Mac.
+2. Open the `.dmg` and drag **DropLAN** into **Applications**.
+3. Because the build is unsigned, double-clicking it straight away will say
+   it's "damaged" or from an "unidentified developer" and refuse to open.
+   Do **one** of these instead, just the first time:
+   - Right-click (or Control-click) **DropLAN.app** in Applications → **Open**
+     → confirm **Open** in the dialog that appears, **or**
+   - Run in Terminal:
+     ```bash
+     xattr -dr com.apple.quarantine /Applications/DropLAN.app
+     ```
+4. Open DropLAN normally from now on.
+5. The first time you share a file, macOS asks for **Local Network**
+   permission — allow it, or no other device on your Wi-Fi can reach the app.
+
+### Windows
+
+1. Download the `.exe` (`DropLAN_<version>_x64-setup.exe`) or the `.msi`.
+2. Run it. **Windows SmartScreen** will likely warn that this is from an
+   unrecognised publisher, since it's unsigned — click **More info → Run
+   anyway**.
+3. Windows Defender Firewall prompts on first launch. Tick **Private
+   networks** and allow; leave **Public networks** unticked.
+
+### Linux
+
+- **AppImage**: `chmod +x DropLAN_<version>_amd64.AppImage`, then run it
+  directly.
+- **.deb** (Debian/Ubuntu): `sudo dpkg -i DropLAN_<version>_amd64.deb`
+
+No release has been published yet for this repository — the Releases page
+will list installers as soon as a `v*` tag is pushed, or you can build it
+yourself (see "Building it" below).
+
+---
+
 ## Security model
 
 The assumption is that a private LAN is *private*, not *trusted* — a café

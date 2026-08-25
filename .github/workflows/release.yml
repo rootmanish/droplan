@@ -14,6 +14,11 @@ jobs:
   build:
     name: ${{ matrix.label }}
     runs-on: ${{ matrix.os }}
+    # `secrets` isn't a valid context inside `if:` conditions, only inside
+    # `env:` — so whether Apple signing is configured is resolved once here,
+    # as a plain env string, and the two build steps below branch on that.
+    env:
+      APPLE_SIGNING_CONFIGURED: ${{ secrets.APPLE_CERTIFICATE != '' }}
     strategy:
       fail-fast: false
       matrix:
@@ -68,11 +73,45 @@ jobs:
 
       - run: npm ci
 
-      - uses: tauri-apps/tauri-action@v0
+      # Signing is entirely optional and, on a fork or a repo with no Apple
+      # Developer account, `secrets.APPLE_CERTIFICATE` genuinely does not
+      # exist. That's split into two mutually exclusive steps rather than one
+      # step with all six APPLE_* vars always listed under `env:` — GitHub
+      # Actions creates every key named under `env:` regardless of whether
+      # the underlying secret exists, so an absent secret still produces a
+      # real (empty) APPLE_CERTIFICATE environment variable. Older
+      # tauri-bundler releases check only whether that variable is *present*,
+      # not whether it's non-empty, and attempt to import it as a keychain
+      # certificate anyway — which is what a completely secret-free repo hits
+      # first, with `security: SecKeychainItemImport: ... not valid`. Never
+      # setting the key at all sidesteps that regardless of bundler version.
+      - name: Build (unsigned)
+        if: ${{ env.APPLE_SIGNING_CONFIGURED == 'false' }}
+        uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Signing and notarisation are optional: without these secrets the
-          # build still succeeds and produces unsigned artifacts.
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: DropLAN ${{ github.ref_name }}
+          releaseBody: |
+            Desktop builds of DropLAN.
+
+            - macOS: `.dmg` (Apple Silicon and Intel)
+            - Windows: `.exe` (NSIS) and `.msi`
+            - Linux: `.AppImage` and `.deb`
+
+            macOS builds are unsigned. Gatekeeper will quarantine the app;
+            right-click → Open the first time, or run
+            `xattr -dr com.apple.quarantine /Applications/DropLAN.app`.
+          releaseDraft: true
+          prerelease: false
+          args: ${{ matrix.args }}
+
+      - name: Build (signed)
+        if: ${{ env.APPLE_SIGNING_CONFIGURED == 'true' }}
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
           APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
           APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
@@ -89,9 +128,7 @@ jobs:
             - Windows: `.exe` (NSIS) and `.msi`
             - Linux: `.AppImage` and `.deb`
 
-            macOS builds are unsigned unless signing secrets are configured;
-            right-click → Open the first time, or run
-            `xattr -dr com.apple.quarantine /Applications/DropLAN.app`.
+            macOS builds are signed and notarised.
           releaseDraft: true
           prerelease: false
           args: ${{ matrix.args }}
